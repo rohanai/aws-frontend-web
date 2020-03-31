@@ -3,6 +3,7 @@ node_js:
   - '12.16.1'
 cache:
   npm: true
+  yarn: false
   directories:
     - node_modules
 script:
