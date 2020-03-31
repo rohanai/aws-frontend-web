@@ -9,6 +9,9 @@ cache:
     - node_modules
 script:
   - yarn test
+branches:
+  only:
+  - master
 before_deploy:
   - yarn global add travis-ci-cloudfront-invalidation
   - yarn run build
@@ -21,5 +24,6 @@ deploy:
   local-dir: dist
   on:
     branch: master
+    all_branches: true
 after_deploy:
   - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY_ID -s $AWS_SECRET_ACCESS_KEY -c $CLOUDFRONT_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST
